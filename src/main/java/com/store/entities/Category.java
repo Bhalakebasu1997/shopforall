@@ -1,0 +1,43 @@
+package com.store.entities;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
+public class Category {
+	
+	@Id
+	@Column(name="id")
+	private String categoryId;
+	
+	@Column(name="category_title", nullable=false)
+	private String title;
+	@Column(name="category_desc", length=500)
+	private String description;
+	
+	@Column(name="coverImage")
+	private String coverImage;
+	
+	@OneToMany(mappedBy= "category", cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+	private List<Product> products = new ArrayList<>();
+	
+
+}
